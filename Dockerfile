@@ -18,4 +18,6 @@ RUN cd /tmp/libyakisoba && autoreconf -i && mkdir build && cd build && ../config
 RUN cd /tmp && git clone https://github.com/tsunoda14/libsobacas.git
 RUN cd /tmp/libsobacas && autoreconf -i && mkdir build && cd build && ../configure && make && make install
 
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+
 COPY ./recpt1_softcas.sh /opt/bin/recpt1_softcas.sh
