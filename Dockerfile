@@ -28,4 +28,10 @@ RUN cd /tmp && git clone https://github.com/tsunoda14/libsobacas.git \
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY ./recpt1_softcas.sh /opt/bin/recpt1_softcas.sh
+COPY --chmod=755 <<'EOF' /opt/bin/recpt1_softcas.sh
+#!/bin/bash
+
+export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+export LD_PRELOAD=/usr/local/lib/libsobacas.so
+exec /opt/bin/recpt1 "$@"
+EOF
