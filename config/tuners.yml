@@ -1,0 +1,22 @@
+# PX-W3U4/PX-W3PE4/PX-Q3U4/PX-Q3PE4
+- name: PX4-S1
+  types:
+    - BS
+    - CS
+  command: /opt/bin/recpt1_softcas.sh --device /dev/px4video0 --lnb 15 --b25 <channel> - -
+
+- name: PX4-S2
+  types:
+    - BS
+    - CS
+  command: /opt/bin/recpt1_softcas.sh --device /dev/px4video1 --lnb 15 --b25 <channel> - -
+
+- name: PX4-T1
+  types:
+    - GR
+  command: /opt/bin/recpt1_softcas.sh --device /dev/px4video2 --b25 <channel> - -
+
+- name: PX4-T2
+  types:
+    - GR
+  command: /opt/bin/recpt1_softcas.sh --device /dev/px4video3 --b25 <channel> - -
