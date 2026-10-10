@@ -1,25 +1,23 @@
 services:
   mirakurun:
-    # `latest` can be changed to fix the version
-    # `latest` の部分を編集するとバージョンを固定できます
-    # available tags: https://hub.docker.com/r/chinachu/mirakurun/tags
-    # image: chinachu/mirakurun:${MIRAKURUN_IMAGE_TAG:-latest}
+    build:
+      context: .
 
     # 環境変数
     environment:
       TZ: Asia/Tokyo
       # set to "1" to disable pcscd
       # pcscd を無効にする場合は "1"
-      DISABLE_PCSCD: "${DISABLE_PCSCD:-0}"
+      # DISABLE_PCSCD: "${DISABLE_PCSCD:-0}"
       # set to "1" to disable fetch/build the B25 test decoder command
       # B25 テストコマンドの取得とビルドを無効にする場合は "1"
-      DISABLE_B25_TEST: "${DISABLE_B25_TEST:-0}"
+      # DISABLE_B25_TEST: "${DISABLE_B25_TEST:-0}"
       # comment out below if you commented out `network_mode: host`
       # `network_mode: host` をコメントアウトする場合はここもコメントアウト
       #DOCKER_NETWORK: host
       # set hostname if accesing by hostname (other than IP address)
       # ブラウザから IP アドレス以外でアクセスする場合はホスト名を設定
-      hostname: nuc
+      # hostname: <your-hostname>
       # --
       # for debug
       #LOG_LEVEL: "3"
@@ -43,9 +41,9 @@ services:
     volumes:
       # you can change to any location if you want.
       - ./config:/app-config:ro
-      #- ./mirakurun/run:/var/run
-      # - ./mirakurun/opt:/opt
       - ./data:/app-data
+      # - ./mirakurun/run:/var/run
+      # - ./mirakurun/opt:/opt
 
       # if use host's pcscd (DISABLE_PCSCD=1)
       # ホストの pcscd を使う場合 (DISABLE_PCSCD=1)
@@ -55,10 +53,6 @@ services:
       # 全てのデバイスを追加 (開発用)
       #- /dev:/dev
 
-    #container_name: mirakurun
-    build:
-      context: .
-    #network_mode: host
     ports:
       - "40772:40772/tcp"
       - "40772:40772/udp"
